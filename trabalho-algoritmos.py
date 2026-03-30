@@ -9,12 +9,16 @@ titulo = r"""
 """
 
 
-linha = "═" * 110 
+linha = "═" * 110
+
 
 print(linha)
 print(titulo)
 enter = input("Pressione [ENTER] para entrar")
-os.system("clear")
+if(os.name == "posix"):
+    os.system("clear")
+else:
+    os.system("cls")
 print(" " * 42 )
 print(linha)
 print("------------------")
@@ -72,6 +76,11 @@ elif pesoFruta2 >=10:
 resumoFinal=valorTotalFruta1+valorTotalFruta2
     
 pagamento = input("Deseja pagar à vista para obter desconto? (S/N): ").upper()
+if(os.name == "posix"):
+    os.system("clear")
+else:
+    os.system("cls")
+
         
 print("╔════════════════════════════════════╗")
 
