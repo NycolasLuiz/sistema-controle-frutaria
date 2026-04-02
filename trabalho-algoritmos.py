@@ -9,90 +9,98 @@ titulo = r"""
 """
 
 
-linha = "═" * 110
-
+linha = "═" * 55
 
 print(linha)
 print(titulo)
-enter = input("Pressione [ENTER] para entrar")
-if(os.name == "posix"):
-    os.system("clear")
-else:
-    os.system("cls")
-print(" " * 42 )
+input("Pressione ENTER para começar...")
+
+os.system("cls" if os.name == "nt" else "clear")
+
 print(linha)
-print("------------------")
-print("| maça:   1      |")
-print("| banana: 2      |")
-print("| pera:   3      |")
-print("| uva:    4      |")
-print("------------------")
-fruta1 = int(input("ESCOLHA A PRIMEIRA FRUTA:  "))
+print("MENU DE FRUTAS")
+print(linha)
+print("1 - Maçã")
+print("2 - Banana")
+print("3 - Pera")
+print("4 - Uva")
+print(linha)
 
-if(fruta1 == 1):
-    pesoFruta1 = float(input("Insira o peso da maça:  "))
-    valorFruta1=float(input("Insira o valor da maça  R$:  "))
+# PRIMEIRA FRUTA
+fruta1 = int(input("Escolha a primeira fruta: "))
 
-if(fruta1 == 2):
-    pesoFruta1 = float(input("Insira o peso da banana:  "))
-    valorFruta1=float(input("Insira o valor da banana  R$:  "))
-    
-if(fruta1 == 3):
-    pesoFruta1 = float(input("Insira o peso da pera:  "))
-    valorFruta1=float(input("Insira o valor da pera  R$:  "))
+if fruta1 == 1:
+    nome1 = "maçã"
+elif fruta1 == 2:
+    nome1 = "banana"
+elif fruta1 == 3:
+    nome1 = "pera"
+elif fruta1 == 4:
+    nome1 = "uva"
 
-if(fruta1 == 4):
-    pesoFruta1 = float(input("Insira o peso da uva: "))
-    valorFruta1=float(input("Insira o valor da uva  R$:  "))
-    
-valorTotalFruta1=pesoFruta1*valorFruta1
-    
-fruta2 = int(input("ESCOLHA A SEGUNDA FRUTA:  "))
+peso1 = float(input(f"Peso da {nome1}: "))
+valor1 = float(input(f"Valor da {nome1} (R$): "))
 
-if(fruta2 == 1):
-    pesoFruta2 = float(input("Insira o peso da maça:  "))
-    valorFruta2=float(input("Insira o valor da maça R$:  "))
+subtotal1 = peso1 * valor1
 
-if(fruta2 == 2):
-    pesoFruta2 = float(input("Insira o peso da banana:  "))
-    valorFruta2=float(input("Insira o valor da banana R$:  "))
+if peso1 >= 10:
+    subtotal1 *= 0.90
+elif peso1 >= 5:
+    subtotal1 *= 0.95
 
-if(fruta2 == 3):
-    pesoFruta2 = float(input("Insira o peso da pera:  "))
-    valorFruta2=float(input("Insira o valor da pera R$:  "))
+print(linha)
 
-if(fruta2 == 4):
-    pesoFruta2 = float(input("Insira o peso da uva:  "))
-    valorFruta2=float(input("Insira o valor da uva R$:  "))
-    
-valorTotalFruta2=pesoFruta2*valorFruta2
+# SEGUNDA FRUTA
+fruta2 = int(input("Escolha a segunda fruta: "))
 
-if pesoFruta1 >=5:
-   valorTotalFruta1=valorTotalFruta1*0.95
-    
-elif pesoFruta2 >=10:
-    valorTotalFruta2=valorTotalFruta2*0.90
+if fruta2 == 1:
+    nome2 = "maçã"
+elif fruta2 == 2:
+    nome2 = "banana"
+elif fruta2 == 3:
+    nome2 = "pera"
+elif fruta2 == 4:
+    nome2 = "uva"
 
-resumoFinal=valorTotalFruta1+valorTotalFruta2
-    
-pagamento = input("Deseja pagar à vista para obter desconto? (S/N): ").upper()
-if(os.name == "posix"):
-    os.system("clear")
-else:
-    os.system("cls")
+peso2 = float(input(f"Peso da {nome2}: "))
+valor2 = float(input(f"Valor da {nome2} (R$): "))
 
-        
-print("╔════════════════════════════════════╗")
+subtotal2 = peso2 * valor2
+
+if peso2 >= 10:
+    subtotal2 *= 0.90
+elif peso2 >= 5:
+    subtotal2 *= 0.95
+
+total = subtotal1 + subtotal2
+
+print(linha)
+pagamento = input("Pagamento à vista? (S/N): ").upper()
 
 if pagamento == "S":
-    print("║ PAGAMENTO À VISTA CONFIRMADO       ║")
-    print("║ DESCONTO DE 50% APLICADO           ║")
-    resumoFinal = resumoFinal * 0.5
+    total *= 0.95
+    desconto_pagamento = "5%"
 else:
-    print("║ PAGAMENTO NÃO FOI À VISTA          ║")
-    print("║ DESCONTO NÃO APLICADO              ║")
+    desconto_pagamento = "0%"
 
-print("╚════════════════════════════════════╝")
+os.system("cls" if os.name == "nt" else "clear")
 
+# RESUMO FINAL
+print(linha)
+print("RESUMO DA COMPRA")
+print(linha)
 
-print(f"TOTAL A PAGAR: R$ {resumoFinal:.2f}")
+print(f"{nome1.capitalize():<10} | {peso1:>5}kg | R$ {valor1:<6.2f}")
+print(f"Subtotal: R$ {subtotal1:.2f}")
+
+print("-" * 55)
+
+print(f"{nome2.capitalize():<10} | {peso2:>5}kg | R$ {valor2:<6.2f}")
+print(f"Subtotal: R$ {subtotal2:.2f}")
+
+print("-" * 55)
+
+print(f"Desconto pagamento: {desconto_pagamento}")
+print(f"TOTAL FINAL: R$ {total:.2f}")
+
+print(linha)
